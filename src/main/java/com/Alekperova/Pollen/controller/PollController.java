@@ -2,14 +2,12 @@ package com.Alekperova.Pollen.controller;
 
 
 import com.Alekperova.Pollen.Service.PollService;
+import com.Alekperova.Pollen.model.Answer;
 import com.Alekperova.Pollen.model.Poll;
 import com.Alekperova.Pollen.repository.PollRepository;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,5 +24,9 @@ public class PollController {
     @GetMapping("/poll")
     public List<Poll> getAllPolls(){
         return pollService.getAllPolls();
+    }
+    @GetMapping("/poll/{id}")
+    public List<Answer> getAllAnswersByQuestion(@PathVariable Long id){
+        return pollService.getAllAnswersByQuestion(id);
     }
 }

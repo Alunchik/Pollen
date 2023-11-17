@@ -1,9 +1,14 @@
 package com.Alekperova.Pollen.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "answers")
@@ -12,12 +17,13 @@ import lombok.Setter;
 public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+
     private Long id;
     private String answerText;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="question_id")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "question_id")
+    @JsonIgnore
     private Question question;
-
-    @Column(columnDefinition = "integer default 0")
-    private Integer selected;
+    @Column
+    private Integer selected = 0;
 }

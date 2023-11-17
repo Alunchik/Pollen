@@ -14,6 +14,6 @@ public class Poll {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
     private Question question;
-
 }
