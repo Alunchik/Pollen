@@ -28,10 +28,8 @@ public class QuestionService {
         answerRepository.save(answer);
     }
 
-    public void editQuestion(Long questionId, Principal principal, String questionText){
-        Question question = questionRepository.findById(questionId).orElseThrow();
-        Poll poll = question.getPoll();
-        question.setQuestionText(questionText);
+    public void editQuestion(Long questionId, Principal principal, Question question){
+        Poll poll = questionRepository.findById(questionId).orElseThrow().getPoll();
         if(poll.getUserLogin().equals(principal.getName())){
             questionRepository.save(question);
         }

@@ -25,5 +25,4 @@ public class Question {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private List<Answer> answers;
-    private Integer selected = 0;
 }

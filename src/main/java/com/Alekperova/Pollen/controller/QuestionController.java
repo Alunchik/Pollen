@@ -5,6 +5,7 @@ import com.Alekperova.Pollen.Service.PollService;
 import com.Alekperova.Pollen.Service.QuestionService;
 import com.Alekperova.Pollen.model.Answer;
 import com.Alekperova.Pollen.model.Poll;
+import com.Alekperova.Pollen.model.Question;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,5 +24,9 @@ public class QuestionController {
         questionService.vote(answerId);
     }
 
+    @PutMapping("/question/{questionId}")
+    public void editQuestion(Principal principal, @PathVariable Long questionId, @RequestBody Question question){
+        questionService.editQuestion(questionId, principal, question);
+    }
 
 }

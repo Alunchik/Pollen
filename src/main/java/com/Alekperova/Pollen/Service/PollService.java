@@ -26,6 +26,7 @@ public class PollService {
 
     public void addPoll(Poll poll, Principal principal){
         poll.setUserLogin(principal.getName());
+        poll.getQuestion().setPoll(poll);
         pollRepository.save(poll);
     }
 
