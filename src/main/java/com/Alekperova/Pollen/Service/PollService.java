@@ -38,6 +38,7 @@ public class PollService {
         return answerRepository.findByQuestionId(questionId);
     }
 
+
     public void changePollTopic(Principal principal, String topic, Long pollId){
         Poll poll = pollRepository.findById(pollId).orElseThrow(IllegalArgumentException::new);
         poll.setPollTopic(topic);
