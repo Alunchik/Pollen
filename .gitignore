@@ -9,7 +9,6 @@
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
-
 # Package Files #
 *.jar
 *.war
@@ -26,3 +25,6 @@ hs_err_pid*
 replay_pid*
 
 /.idea
+/target/
+/.mvn/
+/.idea/
