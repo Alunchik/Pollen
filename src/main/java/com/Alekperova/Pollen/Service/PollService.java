@@ -2,12 +2,9 @@ package com.Alekperova.Pollen.Service;
 
 import com.Alekperova.Pollen.model.Answer;
 import com.Alekperova.Pollen.model.Poll;
-import com.Alekperova.Pollen.model.Question;
 import com.Alekperova.Pollen.repository.AnswerRepository;
 import com.Alekperova.Pollen.repository.PollRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
@@ -50,4 +47,19 @@ public class PollService {
             throw new AccessDeniedException("Only creator can edit poll: " + poll.getUserLogin() + ", you are " + principal.getName());
         }
     }
+
+    public void deletePollById(Principal principal, Long pollId){
+        Poll poll = pollRepository.findById(pollId).orElseThrow(IllegalArgumentException::new);
+        if(poll.getUserLogin().equals(principal.getName())){
+            pollRepository.deleteById(pollId);
+        }
+        else{
+            throw new AccessDeniedException("Only creator can edit poll: " + poll.getUserLogin() + ", you are " + principal.getName());
+        }
+    }
+
+    public void deletePollByIdAsAdmin(Long pollId){
+            pollRepository.deleteById(pollId);
+    }
+
 }

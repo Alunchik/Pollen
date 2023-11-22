@@ -21,8 +21,8 @@ public class Answer {
 
     private Long id;
     private String answerText;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "question_id")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="question_id", referencedColumnName = "id")
     @JsonIgnore
     private Question question;
     @Column

@@ -36,5 +36,8 @@ public class PollController {
         pollService.changePollTopic(principal, pollTopic, pollId);
     }
 
-
+    @DeleteMapping("poll/{pollId}")
+    public void deletePollById(Principal principal, @PathVariable Long pollId){
+        pollService.deletePollById(principal, pollId);
+    }
 }

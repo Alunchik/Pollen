@@ -9,7 +9,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "tables")
+@Table
 @Getter
 @Setter
 public class Question {
@@ -22,7 +22,7 @@ public class Question {
     @JoinColumn(name = "poll_id")
     @JsonIgnore
     private Poll poll;
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private List<Answer> answers;
 }

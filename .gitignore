@@ -30,3 +30,7 @@ replay_pid*
 /.mvn/
 /.idea/
 /Pollen.iml
+/.idea/
+/.mvn/
+/src/main/resources/
+/target/
