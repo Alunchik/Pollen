@@ -1,10 +1,14 @@
 package com.Alekperova.Pollen.model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
-import java.util.List;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "polls")
@@ -16,4 +20,6 @@ public class Poll {
     private Long id;
     @OneToOne(cascade = CascadeType.ALL)
     private Question question;
+    private String pollTopic;
+    private String userLogin;
 }

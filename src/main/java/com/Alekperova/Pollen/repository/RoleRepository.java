@@ -1,12 +1,11 @@
 package com.Alekperova.Pollen.repository;
 
-import com.Alekperova.Pollen.model.User;
+import com.Alekperova.Pollen.model.Role;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
-
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Long> {
-    Optional<User> findByUsername(String username);
+public interface RoleRepository extends CrudRepository<Role, Integer> {
+    Optional<Role> findByName(String name);
 }

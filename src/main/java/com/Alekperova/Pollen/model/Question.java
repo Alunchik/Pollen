@@ -2,10 +2,10 @@ package com.Alekperova.Pollen.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
@@ -25,4 +25,5 @@ public class Question {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private List<Answer> answers;
+    private Integer selected = 0;
 }

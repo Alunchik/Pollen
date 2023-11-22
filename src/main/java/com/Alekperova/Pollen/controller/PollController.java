@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 
@@ -18,8 +19,8 @@ public class PollController {
 
     private final PollService pollService;
     @PostMapping("/poll")
-    public void createPoll(@RequestBody Poll poll){
-        pollService.addPoll(poll);
+    public void createPoll(@RequestBody Poll poll, Principal principal){
+        pollService.addPoll(poll, principal);
     }
     @GetMapping("/poll")
     public List<Poll> getAllPolls(){
@@ -29,4 +30,11 @@ public class PollController {
     public List<Answer> getAllAnswersByQuestion(@PathVariable Long id){
         return pollService.getAllAnswersByQuestion(id);
     }
+
+    @PutMapping("/poll/{pollId}")
+    public void changePollTopic(Principal principal, @PathVariable Long pollId, @RequestParam String pollTopic){
+        pollService.changePollTopic(principal, pollTopic, pollId);
+    }
+
+
 }
