@@ -12,16 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 import java.util.List;
 
-
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 @RestController
 public class PollController {
 
     private final PollService pollService;
+
+    @CrossOrigin
     @PostMapping("/poll")
     public void createPoll(@RequestBody Poll poll, Principal principal){
         pollService.addPoll(poll, principal);
     }
+    @CrossOrigin
     @GetMapping("/poll")
     public List<Poll> getAllPolls(){
         return pollService.getAllPolls();

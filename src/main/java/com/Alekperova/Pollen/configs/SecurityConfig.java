@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
+import java.util.List;
 
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
@@ -39,7 +41,16 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+         CorsConfiguration corsConfiguration = new CorsConfiguration();
+            corsConfiguration.setAllowedHeaders(List.of("Authorization", "Cache-Control", "Content-Type"));
+            corsConfiguration.setAllowedOrigins(List.of("*"));
+            corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PUT","OPTIONS","PATCH", "DELETE"));
+            corsConfiguration.setAllowCredentials(true);
+            corsConfiguration.setExposedHeaders(List.of("Authorization"));
+
+
+            http
+                .cors(Customizer.withDefaults())
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/admin").hasRole("ADMIN")
@@ -54,11 +65,11 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean
+    /*  @Bean
     CorsConfigurationSource corsConfigurationSource() {
      CorsConfiguration configuration = new CorsConfiguration();
 //        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "HEAR"));
+//        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "DELETE", "HEAD"));
        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         configuration.setAllowedOrigins(Arrays.asList("*"));
         configuration.setAllowedMethods(Arrays.asList("*"));
@@ -66,6 +77,7 @@ public class SecurityConfig {
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
+*/
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
